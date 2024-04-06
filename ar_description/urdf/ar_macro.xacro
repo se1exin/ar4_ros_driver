@@ -204,5 +204,97 @@
       <axis xyz="0 0 1"/>
       <limit lower="${-155.0 / 180.0 * pi}" upper="${155.0 / 180.0 * pi}" effort="0" velocity="0.5"/>
     </joint>
+
+    <link name="gripper_base_link">
+      <inertial>
+        <origin xyz="0.03094962 0.01965330 0.02419958"/>
+        <mass value="0.02830000"/>
+        <inertia ixx="0.00000844" ixy="-0.00000012" ixz="-0.00000004" iyy="0.00001831" iyz="0.00000000" izz="0.00001724"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ar_description)/meshes/gripper/base_carriage.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ar_description)/meshes/gripper/base_carriage.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="gripper_base_joint" type="fixed">
+        <origin xyz="-0.03 -0.017 0.016" rpy="0 0 0"/>
+        <parent link="link_6"/>
+        <child link="gripper_base_link" />
+    </joint>
+    
+    
+    <link name="gripper_finger_left_link">
+      <inertial>
+        <origin xyz="0.01203959 0.01177336 0.00651997"/>
+        <mass value="0.00481000"/>
+        <inertia ixx="0.00000065" ixy="0.00000005" ixz="0.00000001" iyy="0.00000045" iyz="-0.00000012" izz="0.00000051"/>
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <mesh filename="file://$(find ar_description)/meshes/gripper/jaw_left.STL"/>
+        </geometry>
+        <material name="">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ar_description)/meshes/gripper/jaw_left.STL"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="gripper_finger_left_joint" type="prismatic">
+        <origin xyz="0 -0.00125 0.0325" rpy="0 0 0"/>
+        <parent link="gripper_base_link"/>
+        <child link="gripper_finger_left_link" />
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="0.015" velocity="100" effort="100"/> 
+    </joint>
+
+    <link name="gripper_finger_right_link">
+      <inertial>
+        <origin xyz="0.01203959 0.01177336 0.00651997"/>
+        <mass value="0.00481000"/>
+        <inertia ixx="0.00000065" ixy="0.00000005" ixz="0.00000001" iyy="0.00000045" iyz="-0.00000012" izz="0.00000051"/>
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <mesh filename="file://$(find ar_description)/meshes/gripper/jaw_right.STL"/>
+        </geometry>
+        <material name="">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="file://$(find ar_description)/meshes/gripper/jaw_right.STL"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="gripper_finger_right_joint" type="prismatic">
+        <origin xyz="0.06 0.03303 0.0325" rpy="0 0 3.14159"/>
+        <parent link="gripper_base_link"/>
+        <child link="gripper_finger_right_link" />
+        <axis xyz="1 0 0"/>
+        <limit lower="0" upper="0.015" velocity="100" effort="100"/> 
+        <mimic joint="gripper_finger_left_joint" multiplier="1" offset="0" />
+    </joint>
   </xacro:macro>
 </robot>

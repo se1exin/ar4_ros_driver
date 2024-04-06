@@ -87,6 +87,25 @@ The various use cases of the modules and instructions to run them are described 
 
 ---
 
+### Basic Demo in RViz
+To preview the robot model and it's joints, run the following across 3 terminals:
+
+Start the state publisher:
+```
+ros2 launch ar_description robot_state_publisher.launch.py
+```
+
+Start the joint state publisher UI, which you can use to manipulate each joint of the robot model
+```
+ros2 run joint_state_publisher_gui joint_state_publisher_gui
+```
+
+Start RViz and open the `rviz` config file located at `ar_description/ar_macro.rviz`.
+```
+rviz2
+```
+
+
 ### MoveIt Demo in RViz
 
 If you are unfamiliar with MoveIt, it is recommended to start with this to explore planning with MoveIt in RViz. This contains neither a real-world nor a simulated arm but just a model loaded within RViz for visualisation.
