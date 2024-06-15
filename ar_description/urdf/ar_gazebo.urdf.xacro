@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
   <xacro:include filename="$(find ar_description)/urdf/ar_macro.xacro" />
   <xacro:include filename="$(find ar_description)/urdf/ar_gripper_macro.xacro" />
+  <xacro:include filename="$(find ar_description)/urdf/ar_camera_macro.xacro" />
   <xacro:include filename="$(find ar_description)/urdf/ar.ros2_control.xacro" />
   <xacro:include filename="$(find ar_description)/urdf/ar_gripper.ros2_control.xacro" />
 
@@ -11,7 +12,10 @@
   <xacro:ar_robot parent="world">
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:ar_robot>
+
   <xacro:ar_gripper parent="ee_link" />
+
+  <xacro:ar_camera />
 
   <xacro:ar_ros2_control
     name="ARGazeboSystem"
@@ -32,5 +36,25 @@
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <parameters>$(arg simulation_controllers)</parameters>
     </plugin>
+    <sensor name="ar_camera" type="camera">
+      <pose> 0 0 0 0 0 0 </pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <camera>
+        <horizontal_fov>1.089</horizontal_fov>
+        <image>
+          <format>R8G8B8</format>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>1.0</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <frame_name>camera_link_optical</frame_name>
+      </plugin>
+    </sensor>
   </gazebo>
 </robot>
