@@ -2,23 +2,37 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
   <xacro:macro name="ar_camera">
 
-    <joint name="camera_joint" type="fixed">
+    <joint name="camera_jump_joint" type="fixed">
       <parent link="base_link" />
+      <child link="camera_jump_link" />
+      <origin xyz="0.01 -0.67 0.75" rpy="${0 * pi / 180} ${90 * pi / 180} ${0 * pi / 180}" />
+    </joint>
+    <link name="camera_jump_link">
+      <visual>
+        <geometry>
+          <box size="0.010 0.03 0.03" />
+        </geometry>
+        <color rgba="1 1 0 1"/>
+      </visual>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+      <parent link="camera_jump_link" />
       <child link="camera_link" />
-      <origin xyz="0 -0.35 1.0" rpy="0 ${pi/2} 0" />
+      <origin xyz="0 0 0" rpy="${0 * pi / 180} ${0 * pi / 180} ${27 * pi / 180}" />
     </joint>
     <link name="camera_link">
       <visual>
         <geometry>
           <box size="0.010 0.03 0.03" />
         </geometry>
-        <material name="red" />
+        <color rgba="1 1 0 1"/>
       </visual>
     </link>
 
 
     <joint name="camera_optical_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-90 * pi / 180}" />
       <parent link="camera_link" />
       <child link="camera_link_optical" />
     </joint>

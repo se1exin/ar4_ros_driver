@@ -43,6 +43,7 @@ class ARHardwareInterface : public hardware_interface::SystemInterface {
   std::vector<double> joint_offsets_;
   std::vector<double> joint_positions_;
   std::vector<double> joint_velocities_;
+  std::vector<double> joint_accelerations_;
   std::vector<double> joint_efforts_;
   std::vector<double> joint_position_commands_;
   std::vector<double> joint_velocity_commands_;

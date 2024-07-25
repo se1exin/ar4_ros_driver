@@ -18,6 +18,8 @@
     serial_port="$(arg serial_port)"
     calibrate="$(arg calibrate)"
     joint_offset_parameters_file="$(find ar_hardware_interface)/config/joint_offsets.yaml"
+    joint_velocity_parameters_file="$(find ar_hardware_interface)/config/joint_velocities.yaml"
+    joint_acceleration_parameters_file="$(find ar_hardware_interface)/config/joint_accelerations.yaml"
   />
 
   <xacro:if value="$(arg include_gripper)">
@@ -33,4 +35,7 @@
     />
   </xacro:if>
 
+  <xacro:include
+    filename="$(find ar_description)/urdf/ar_camera_macro.xacro" />
+  <xacro:ar_camera />
 </robot>

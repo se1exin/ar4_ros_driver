@@ -30,6 +30,7 @@ void ARHardwareInterface::init_variables() {
   actuator_positions_.resize(num_joints);
   joint_positions_.resize(num_joints);
   joint_velocities_.resize(num_joints);
+  joint_accelerations_.resize(num_joints);
   joint_efforts_.resize(num_joints);
   joint_position_commands_.resize(num_joints);
   joint_velocity_commands_.resize(num_joints);
@@ -38,6 +39,12 @@ void ARHardwareInterface::init_variables() {
   for (int i = 0; i < num_joints; ++i) {
     joint_offsets_[i] =
         std::stod(info_.joints[i].parameters["position_offset"]);
+
+    joint_velocities_[i] =
+        std::stod(info_.joints[i].parameters["joint_velocity"]);
+
+    joint_accelerations_[i] =
+        std::stod(info_.joints[i].parameters["joint_acceleration"]);
   }
 }
 
@@ -60,6 +67,8 @@ hardware_interface::CallbackReturn ARHardwareInterface::on_activate(
     joint_positions_[i] = degToRad(actuator_positions_[i] + joint_offsets_[i]);
     joint_position_commands_[i] = joint_positions_[i];
   }
+
+  driver_.setStepperSpeed(joint_velocities_, joint_accelerations_);
 
   return hardware_interface::CallbackReturn::SUCCESS;
 }

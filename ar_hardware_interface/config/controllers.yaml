@@ -26,14 +26,14 @@ joint_trajectory_controller:
       - position
     allow_partial_joints_goal: false
     constraints:
-      stopped_velocity_tolerance: 0.02
+      stopped_velocity_tolerance: 5.0
       goal_time: 0.0
-      joint_1: { trajectory: 0.2, goal: 0.02 }
-      joint_2: { trajectory: 0.2, goal: 0.02 }
-      joint_3: { trajectory: 0.2, goal: 0.02 }
-      joint_4: { trajectory: 0.2, goal: 0.02 }
-      joint_5: { trajectory: 0.2, goal: 0.02 }
-      joint_6: { trajectory: 0.2, goal: 0.02 }
+      joint_1: { trajectory: 5.0, goal: 5.0 }
+      joint_2: { trajectory: 5.0, goal: 5.0 }
+      joint_3: { trajectory: 5.0, goal: 5.0 }
+      joint_4: { trajectory: 5.0, goal: 5.0 }
+      joint_5: { trajectory: 5.0, goal: 5.0 }
+      joint_6: { trajectory: 5.0, goal: 5.0 }
 
 gripper_controller:
   ros__parameters:

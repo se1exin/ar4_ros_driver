@@ -7,10 +7,16 @@
     serial_port
     calibrate
     joint_offset_parameters_file
+    joint_velocity_parameters_file
+    joint_acceleration_parameters_file
   ">
 
     <xacro:property name="joint_offset_parameters"
       value="${xacro.load_yaml(joint_offset_parameters_file)}"/>
+    <xacro:property name="joint_velocity_parameters"
+      value="${xacro.load_yaml(joint_velocity_parameters_file)}"/>
+    <xacro:property name="joint_acceleration_parameters"
+      value="${xacro.load_yaml(joint_acceleration_parameters_file)}"/>
 
     <ros2_control name="${name}" type="system">
 
@@ -29,6 +35,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_1']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_1']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_1']}</param>
       </joint>
 
       <joint name="joint_2">
@@ -40,6 +48,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_2']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_2']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_2']}</param>
       </joint>
 
       <joint name="joint_3">
@@ -51,6 +61,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_3']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_3']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_3']}</param>
       </joint>
 
       <joint name="joint_4">
@@ -62,6 +74,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_4']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_4']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_4']}</param>
       </joint>
 
       <joint name="joint_5">
@@ -73,6 +87,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_5']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_5']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_5']}</param>
       </joint>
 
       <joint name="joint_6">
@@ -84,6 +100,8 @@
           <param name="initial_value">0.0</param>
         </state_interface>
         <param name="position_offset">${joint_offset_parameters['joint_6']}</param>
+        <param name="joint_velocity">${joint_velocity_parameters['joint_6']}</param>
+        <param name="joint_acceleration">${joint_acceleration_parameters['joint_6']}</param>
       </joint>
 
     </ros2_control>
