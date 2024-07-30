@@ -1,6 +1,14 @@
-joint_1: 120.0
-joint_2: 120.0
-joint_3: 120.0
+joint_1: 180.0
+joint_2: 180.0
+joint_3: 180.0
 joint_4: 60.0
 joint_5: 60.0
 joint_6: 60.0
+
+# Original Values
+# joint_1: 30.0
+# joint_2: 30.0
+# joint_3: 30.0
+# joint_4: 30.0
+# joint_5: 30.0
+# joint_6: 30.0

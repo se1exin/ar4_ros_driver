@@ -199,6 +199,14 @@ void moveAwayFromLimitSwitch() {
   return;
 }
 
+void moveAwayFromLimitSwitch(int joint) {
+  stepperJoints[joint].setSpeed(CAL_SPEED * CAL_SPEED_MULT[joint] * CAL_DIR[joint] * -1);
+  for (int j = 0; j < 10000000; j++) {
+    stepperJoints[joint].runSpeed();
+  }
+  stepperJoints[joint].setSpeed(0);
+}
+
 bool reachedLimitSwitch(int joint) {
   int pin = LIMIT_PINS[joint];
   // check multiple times to deal with noise
@@ -276,6 +284,10 @@ void stateTRAJ() {
         // update target joint positions
         readMotorSteps(curMotorSteps);
         for (int i = 0; i < NUM_JOINTS; ++i) {
+          if (reachedLimitSwitch(i)) {
+            moveAwayFromLimitSwitch(i);
+          }
+
           int diffEncSteps = cmdEncSteps[i] - curMotorSteps[i];
           if (abs(diffEncSteps) > 2) {
             int diffMotSteps = diffEncSteps * ENC_DIR[i];
